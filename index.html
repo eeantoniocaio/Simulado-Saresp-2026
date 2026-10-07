@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado SARESP 2026</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-placeholder">🏫</div>
+            <h1>Simulado SARESP 2026</h1>
+            <p>Selecione o seu ano escolar para acessar a prova:</p>
+        </header>
+
+        <main>
+            <h2 class="section-title">Ensino Fundamental</h2>
+            <div class="cards-container">
+                <section class="card">
+                    <h3>6º Ano</h3>
+                    <p>Acesse o simulado para a turma do 6º ano.</p>
+                    <a href="#" onclick="openModal('6ano', '6º Ano'); return false;" class="btn btn-primary">📄 Abrir Prova</a>
+                </section>
+
+                <section class="card">
+                    <h3>7º Ano</h3>
+                    <p>Acesse o simulado para a turma do 7º ano.</p>
+                    <a href="#" onclick="openModal('7ano', '7º Ano'); return false;" class="btn btn-primary">📄 Abrir Prova</a>
+                </section>
+
+                <section class="card">
+                    <h3>8º Ano</h3>
+                    <p>Acesse o simulado para a turma do 8º ano.</p>
+                    <a href="#" onclick="openModal('8ano', '8º Ano'); return false;" class="btn btn-primary">📄 Abrir Prova</a>
+                </section>
+
+                <section class="card">
+                    <h3>9º Ano</h3>
+                    <p>Acesse o simulado para a turma do 9º ano.</p>
+                    <a href="#" onclick="openModal('9ano', '9º Ano'); return false;" class="btn btn-primary">📄 Abrir Prova</a>
+                </section>
+            </div>
+
+            <h2 class="section-title">Ensino Médio</h2>
+            <div class="cards-container">
+                <section class="card">
+                    <h3 class="em">1º Ano</h3>
+                    <p>Acesse o simulado para o 1º ano do Ensino Médio.</p>
+                    <a href="#" onclick="openModal('1medio', '1º Ano (Ensino Médio)', true); return false;" class="btn btn-primary em-btn">📄 Abrir Prova</a>
+                </section>
+
+                <section class="card">
+                    <h3 class="em">2º Ano</h3>
+                    <p>Acesse o simulado para o 2º ano do Ensino Médio.</p>
+                    <a href="#" onclick="openModal('2medio', '2º Ano (Ensino Médio)', true); return false;" class="btn btn-primary em-btn">📄 Abrir Prova</a>
+                </section>
+
+                <section class="card">
+                    <h3 class="em">3º Ano</h3>
+                    <p>Acesse o simulado para o 3º ano do Ensino Médio.</p>
+                    <a href="#" onclick="openModal('3medio', '3º Ano (Ensino Médio)', true); return false;" class="btn btn-primary em-btn">📄 Abrir Prova</a>
+                </section>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 - Coordenação Pedagógica. Boa sorte aos alunos!</p>
+        </footer>
+    </div>
+
+    <!-- Modal Element -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">✖</button>
+            <h3 id="modal-title">Escolha o dia</h3>
+            <p>Selecione qual caderno de prova você deseja acessar:</p>
+            <div class="modal-actions">
+                <a href="#" id="link-dia1" target="_blank" class="btn btn-primary">1º DIA</a>
+                <a href="#" id="link-dia2" target="_blank" class="btn btn-primary">2º DIA</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(id, title, isEm = false) {
+            document.getElementById('modal-title').textContent = title;
+
+            // Paths to PDFs. E.g.: provas/simulado-6ano-dia1.pdf
+            document.getElementById('link-dia1').href = 'provas/simulado-' + id + '-dia1.pdf';
+            document.getElementById('link-dia2').href = 'provas/simulado-' + id + '-dia2.pdf';
+
+            // Adjust modal button colors to match Ensino Médio green if needed
+            const btn1 = document.getElementById('link-dia1');
+            const btn2 = document.getElementById('link-dia2');
+
+            if(isEm) {
+                btn1.className = 'btn btn-primary em-btn';
+                btn2.className = 'btn btn-primary em-btn';
+            } else {
+                btn1.className = 'btn btn-primary';
+                btn2.className = 'btn btn-primary';
+            }
+
+            // Show modal
+            const overlay = document.getElementById('modal');
+            overlay.style.display = 'flex';
+
+            // Trigger animation
+            setTimeout(() => {
+                overlay.classList.add('visible');
+            }, 10);
+        }
+
+        function closeModal() {
+            const overlay = document.getElementById('modal');
+            overlay.classList.remove('visible');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 300);
+        }
+
+        // Close modal if user clicks outside of the content box
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
